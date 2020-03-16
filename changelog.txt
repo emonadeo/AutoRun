@@ -1,0 +1,2 @@
+Initial Alpha Release
+* Added configurable Keybind to toggle Auto-Run
