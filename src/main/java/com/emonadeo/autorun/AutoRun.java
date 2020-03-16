@@ -17,7 +17,7 @@ public class AutoRun implements ModInitializer {
     public void onInitialize() {
         AutoRun.toggled = false;
         AutoRun.keyBinding = FabricKeyBinding.Builder.create(
-                new Identifier("autorun"),
+                new Identifier("autorun", "toggle"),
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_P, // Default to 'p'
                 "key.categories.movement" // Append movement category
