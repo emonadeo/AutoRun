@@ -30,7 +30,7 @@ public class AutoRun implements ModInitializer {
             if (keyBinding.wasPressed()) {
                 toggled = !toggled;
             }
-            else if (client.options.keyBack.wasPressed()) {
+            else if (client.options.keyBack.wasPressed() || client.options.keyForward.wasPressed()) {
                 toggled = false;
             }
         });

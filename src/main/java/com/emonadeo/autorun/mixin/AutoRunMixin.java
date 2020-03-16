@@ -13,10 +13,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(KeyboardInput.class)
 public class AutoRunMixin {
 
-    private boolean pressingForward;
-
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "net/minecraft/client/input/KeyboardInput.pressingForward:Z", opcode = Opcodes.GETFIELD))
     private boolean onPressingForwardInTick(KeyboardInput input) {
-        return this.pressingForward || AutoRun.isToggled();
+        return input.pressingForward || AutoRun.isToggled();
     }
 }
