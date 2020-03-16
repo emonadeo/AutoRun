@@ -8,7 +8,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = "${project.supported_versions}-${project.mod_version}"
 group = project.maven_group
 
 dependencies {
@@ -20,7 +20,7 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modRuntime "io.github.prospector:modmenu:${project.modmenu_version}"
+    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
 }
 
 processResources {
@@ -28,7 +28,7 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include "fabric.mod.json"
-        expand "version": project.version
+        expand "version": project.mod_version
     }
 
     from(sourceSets.main.resources.srcDirs) {
@@ -85,10 +85,11 @@ curseforge {
             changelogType = "text"
             changelog = file("changelog.txt")
 
-            addGameVersion '1.15'
-            addGameVersion '1.15.1'
-            addGameVersion '1.15.2'
-            addGameVersion '1.16-Snapshot'
+            addGameVersion '1.14'
+            addGameVersion '1.14.1'
+            addGameVersion '1.14.2'
+            addGameVersion '1.14.3'
+            addGameVersion '1.14.4'
             addGameVersion 'Java 8'
             addGameVersion 'Fabric'
 

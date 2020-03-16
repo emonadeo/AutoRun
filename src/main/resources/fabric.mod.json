@@ -27,12 +27,9 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": ">=0.7.0",
     "fabric": "*",
-    "minecraft": ">=1.15"
-  },
-  "suggests": {
-    "flamingo": "*"
+    "minecraft": "1.14.x"
   },
   "custom": {
     "modmenu:clientsideOnly": true
