@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "autorun.mixins.json"
   ],
 
   "depends": {
