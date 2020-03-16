@@ -96,8 +96,8 @@ curseforge {
                 requiredLibrary 'fabric-api'
             }
 
+            mainArtifact(remapJar)
             afterEvaluate {
-                mainArtifact(file("${project.buildDir}/libs/${project.archivesBaseName}-${project.version}.jar"))
                 uploadTask.dependsOn(remapJar)
             }
         }
