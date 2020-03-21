@@ -18,9 +18,8 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.emonadeo.autorun.AutoRun"
-    ]
+    "client": [ "com.emonadeo.autorun.AutoRun" ],
+    "modmenu": [ "com.emonadeo.autorun.AutoRunModMenu" ]
   },
   "mixins": [
     "autorun.mixins.json"

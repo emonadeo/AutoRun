@@ -1,4 +1,7 @@
 {
-  "key.autorun.toggle": "Toggle Auto-Run"
+  "key.autorun.toggle": "Toggle Auto-Run",
+  "config.autorun.general": "General",
+  "config.autorun.delayBuffer": "Delay Buffer",
+  "config.autorun.delayBuffer.description": "Activation buffer before the keybind can be deactivated again"
 }
 
