@@ -1,24 +1,24 @@
 package com.emonadeo.autorun;
 
-import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 
-public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory {
+import java.util.function.Function;
+
+public class AutoRunModMenu implements ModMenuApi {
     @Override
     public String getModId() {
         return AutoRun.MODID;
     }
 
     @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return this;
+    public Function<Screen, ? extends Screen> getConfigScreenFactory() {
+        return this::create;
     }
 
-    @Override
     public Screen create(Screen screen) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(screen)
@@ -28,7 +28,7 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory {
         ConfigCategory general = builder.getOrCreateCategory("config." + AutoRun.MODID + ".general");
         general.addEntry(entryBuilder.startIntField("config." + AutoRun.MODID + ".delayBuffer", AutoRun.getDelayBuffer())
             .setDefaultValue(20)
-            .setTooltip("config." + AutoRun.MODID + ".delayBuffer.description")
+            .setTooltip("Activation buffer before Auto-Run can be cancelled again by WASD movement")
             .setSaveConsumer(AutoRun::setDelayBuffer)
             .build());
 
