@@ -1,1 +1,2 @@
-* Added configurable Keybind to toggle Auto-Run
+* Added omnidirectional auto-run w/ configurable buffer
+* Added Cloth Config & Mod Menu integration
