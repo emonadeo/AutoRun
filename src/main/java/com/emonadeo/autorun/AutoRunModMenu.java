@@ -6,6 +6,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.TranslatableText;
 
 public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory {
     @Override
@@ -22,13 +23,13 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory {
     public Screen create(Screen screen) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(screen)
-                .setTitle("title." + AutoRun.MODID + ".config");
+                .setTitle(new TranslatableText("title." + AutoRun.MODID + ".config"));
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-        ConfigCategory general = builder.getOrCreateCategory("config." + AutoRun.MODID + ".general");
-        general.addEntry(entryBuilder.startIntField("config." + AutoRun.MODID + ".delayBuffer", AutoRun.getDelayBuffer())
+        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("config." + AutoRun.MODID + ".general"));
+        general.addEntry(entryBuilder.startIntField(new TranslatableText("config." + AutoRun.MODID + ".delayBuffer"), AutoRun.getDelayBuffer())
             .setDefaultValue(20)
-            .setTooltip("config." + AutoRun.MODID + ".delayBuffer.description")
+            .setTooltip(new TranslatableText("config." + AutoRun.MODID + ".delayBuffer.description"))
             .setSaveConsumer(AutoRun::setDelayBuffer)
             .build());
 
