@@ -16,21 +16,25 @@ public class AutoRunMixin {
 
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "net/minecraft/client/input/KeyboardInput.pressingForward:Z", opcode = Opcodes.GETFIELD))
     private boolean onPressingForward(KeyboardInput input) {
-        return input.pressingForward || AutoRun.getToggled().contains(MovementDirection.FORWARD);
+        input.pressingForward = input.pressingForward || AutoRun.getToggled().contains(MovementDirection.FORWARD);
+        return input.pressingForward;
     }
 
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "net/minecraft/client/input/KeyboardInput.pressingBack:Z", opcode = Opcodes.GETFIELD))
     private boolean onPressingBack(KeyboardInput input) {
-        return input.pressingBack || AutoRun.getToggled().contains(MovementDirection.BACK);
+        input.pressingBack = input.pressingBack || AutoRun.getToggled().contains(MovementDirection.BACK);
+        return input.pressingBack;
     }
 
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "net/minecraft/client/input/KeyboardInput.pressingLeft:Z", opcode = Opcodes.GETFIELD))
     private boolean onPressingLeft(KeyboardInput input) {
-        return input.pressingLeft || AutoRun.getToggled().contains(MovementDirection.LEFT);
+        input.pressingLeft = input.pressingLeft || AutoRun.getToggled().contains(MovementDirection.LEFT);
+        return input.pressingLeft;
     }
 
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "net/minecraft/client/input/KeyboardInput.pressingRight:Z", opcode = Opcodes.GETFIELD))
     private boolean onPressingRight(KeyboardInput input) {
-        return input.pressingRight || AutoRun.getToggled().contains(MovementDirection.RIGHT);
+        input.pressingRight = input.pressingRight || AutoRun.getToggled().contains(MovementDirection.RIGHT);
+        return input.pressingRight;
     }
 }
