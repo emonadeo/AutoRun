@@ -1,2 +1,3 @@
-* Added omnidirectional auto-run w/ configurable buffer
-* Added Cloth Config & Mod Menu integration
+* Added support for Rideables (Boats, Horses, etc)
+* Updated deprecated code
+* Added missing lang entry for config menu
