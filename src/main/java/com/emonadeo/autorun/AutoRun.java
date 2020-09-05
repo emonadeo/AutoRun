@@ -1,8 +1,10 @@
 package com.emonadeo.autorun;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.options.KeyBinding;
@@ -25,7 +27,7 @@ public class AutoRun implements ClientModInitializer {
     public static final String MODID = "autorun";
     public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDirectory(), "autorun.properties");
 
-    private static FabricKeyBinding keyBinding;
+    private static KeyBinding keyBinding;
     private static Set<MovementDirection> toggled;
     private static long timeActivated;
     private static int delayBuffer;
@@ -35,19 +37,16 @@ public class AutoRun implements ClientModInitializer {
         AutoRun.toggled = new HashSet<>();
         AutoRun.timeActivated = -1;
         AutoRun.delayBuffer = 20;
-        AutoRun.keyBinding = FabricKeyBinding.Builder.create(
-                new Identifier(AutoRun.MODID, "toggle"),
+        AutoRun.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_P, // Default to 'p'
                 "key.categories.movement" // Append movement category
-        ).build();
+        ));
 
         loadConfig(CFG_FILE);
 
-        // Register Keybinding
-        KeyBindingRegistry.INSTANCE.register(keyBinding);
-
-        ClientTickCallback.EVENT.register(client -> {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.world != null && keyBinding.wasPressed()) {
                 boolean activating = toggled.isEmpty();
 
