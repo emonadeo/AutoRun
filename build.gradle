@@ -91,6 +91,8 @@ curseforge {
             changelogType = "text"
             changelog = file("changelog.txt")
 
+            addGameVersion '1.16'
+            addGameVersion '1.16.1'
             addGameVersion '1.16.2'
             addGameVersion 'Java 8'
             addGameVersion 'Fabric'
