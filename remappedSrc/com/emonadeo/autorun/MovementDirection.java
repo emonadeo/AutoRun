@@ -1,7 +1,7 @@
 package com.emonadeo.autorun;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.options.KeyBinding;
 
 import java.util.Set;
 import java.util.stream.Collectors;
