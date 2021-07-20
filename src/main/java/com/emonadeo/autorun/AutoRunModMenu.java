@@ -8,9 +8,9 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TranslatableText;
 
-public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory {
+public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory<Screen> {
     @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory() {
+    public ConfigScreenFactory<Screen> getModConfigScreenFactory() {
         return this;
     }
 

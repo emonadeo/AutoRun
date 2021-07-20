@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class AutoRun implements ClientModInitializer {
 
     public static final String MODID = "autorun";
-    public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDirectory(), "autorun.properties");
+    public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "autorun.properties");
 
     private static KeyBinding keyBinding;
     private static Set<MovementDirection> toggled;
