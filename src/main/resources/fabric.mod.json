@@ -3,7 +3,7 @@
   "id": "autorun",
   "version": "${mod_version}",
 
-  "name": "Auto-Run",
+  "name": "AutoRun",
   "description": "Hands-free walking and sprinting",
   "authors": [
     "Emonadeo"
