@@ -36,7 +36,7 @@ public class AutoRun implements ClientModInitializer {
         AutoRun.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_P, // Default to 'p'
+                GLFW.GLFW_KEY_O, // Default to 'o'
                 "key.categories.movement" // Append movement category
         ));
 
