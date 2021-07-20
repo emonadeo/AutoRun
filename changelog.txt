@@ -1,3 +1,2 @@
-* Added support for Rideables (Boats, Horses, etc)
+* Updated for Minecraft 1.17
 * Updated deprecated code
-* Added missing lang entry for config menu
