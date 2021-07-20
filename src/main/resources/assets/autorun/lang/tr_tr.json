@@ -3,5 +3,5 @@
   "title.autorun.config": "AutoRun Ayarları",
   "config.autorun.general": "Genel",
   "config.autorun.delayBuffer": "İptal Etme Gecikmesi",
-  "config.autorun.delayBuffer.description": "Otomatik koşmayı durduracak herhangi bir tuşun gereken basılı tutma süresi."
+  "config.autorun.delayBuffer.description": "Otomatik koşmayı durduracak herhangi bir tuşun gereken basılı tutma süresi"
 }
