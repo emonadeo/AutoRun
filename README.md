@@ -14,7 +14,9 @@ If you are using multiple Fabric mods I recommend also getting [Mod Menu](https:
 
 Press 'P' to toggle automatic walking. You can also hit the sprint key to sprint while auto-walking.
 
-This keybind can be customized in the controls options.
+Press 'Mouse 5' for an alternate sprint key.
+
+These keybinds can be customized in the controls options.
 
 ## FAQ
 
