@@ -1,5 +1,6 @@
 {
   "key.autorun.toggle": "Toggle AutoRun",
+  "key.autorun.altsprint": "Sprint Alternate",
   "title.autorun.config": "AutoRun",
   "config.autorun.general": "General",
   "config.autorun.delayBuffer": "Delay Buffer",

@@ -4,6 +4,7 @@
   "package": "com.emonadeo.autorun.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "AltSprintMixin"
   ],
   "client": [
     "AutoRunMixin"

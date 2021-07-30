@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.StickyKeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
@@ -27,6 +28,7 @@ public class AutoRun implements ClientModInitializer {
     private static Set<MovementDirection> toggled;
     private static long timeActivated;
     private static int delayBuffer;
+    public static KeyBinding altSprintKeybinding;
 
     @Override
     public void onInitializeClient() {
@@ -38,6 +40,12 @@ public class AutoRun implements ClientModInitializer {
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_O, // Default to 'o'
                 "key.categories.movement" // Append movement category
+        ));
+        AutoRun.altSprintKeybinding = KeyBindingHelper.registerKeyBinding(new StickyKeyBinding(
+                "key.autorun.altsprint",
+                GLFW.GLFW_MOUSE_BUTTON_5,
+                "key.categories.movement",
+                () -> {return false;}
         ));
 
         loadConfig(CFG_FILE);
