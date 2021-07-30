@@ -14,10 +14,9 @@ public abstract class AltSprintMixin {
 
     @Inject(method="isPressed", at = @At("HEAD"), cancellable = true)
     private void injectAltSprint(CallbackInfoReturnable<Boolean> cir) {
-        if (this.getTranslationKey().equals("key.sprint")) {
-            if (AutoRun.altSprintKeybinding.isPressed()) {
-                cir.setReturnValue(true);
-            }
+        if (this.getTranslationKey().equals("key.sprint")
+                && AutoRun.altSprintKeybinding.isPressed()) {
+            cir.setReturnValue(true);
         }
     }
 }
