@@ -1,12 +1,12 @@
 plugins {
-    id "fabric-loom" version "0.8-SNAPSHOT"
+    id "fabric-loom" version "0.10-SNAPSHOT"
     id "maven-publish"
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id "com.modrinth.minotaur" version "1.2.1"
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = "${project.supported_versions}-${project.mod_version}"
@@ -49,8 +49,8 @@ tasks.withType(JavaCompile).configureEach {
     // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
     it.options.encoding = "UTF-8"
 
-    // Minecraft 1.17 (21w19a) upwards uses Java 16.
-    it.options.release = 16
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
 }
 
 java {
@@ -71,13 +71,7 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+            from components.java
         }
     }
 
@@ -99,9 +93,8 @@ curseforge {
             changelogType = "text"
             changelog = file("changelog.txt")
 
-            addGameVersion "1.17"
-            addGameVersion "1.17.1"
-            addGameVersion "Java 16"
+            addGameVersion "1.18"
+            addGameVersion "Java 17"
             addGameVersion "Fabric"
 
             relations {
@@ -124,10 +117,9 @@ import com.modrinth.minotaur.TaskModrinthUpload
 task publishModrinth (type: TaskModrinthUpload) {
     token = project.hasProperty("modrinthApiKey") ? project.property("modrinthApiKey") : System.getenv("modrinthApiKey")
     projectId = "2i7tg1Wv"
-    versionName = "v${project.mod_version} (Minecraft 1.17)"
+    versionName = "v${project.mod_version} (Minecraft 1.18)"
     versionNumber = version
     uploadFile = remapJar
-    addGameVersion "1.17"
-    addGameVersion "1.17.1"
+    addGameVersion "1.18"
     addLoader "fabric"
 }
