@@ -1,2 +1,2 @@
-* Updated for Minecraft 1.17
-* Updated deprecated code
+* Updated for Minecraft 1.18
+* Upgraded to Java 17
