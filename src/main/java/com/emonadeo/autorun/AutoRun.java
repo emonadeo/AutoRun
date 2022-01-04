@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -28,6 +29,8 @@ public class AutoRun implements ClientModInitializer {
     private static long timeActivated;
     private static int delayBuffer;
 
+    private static boolean originalAutoJumpSetting;
+
     @Override
     public void onInitializeClient() {
         AutoRun.toggled = new HashSet<>();
@@ -47,8 +50,9 @@ public class AutoRun implements ClientModInitializer {
                 boolean activating = toggled.isEmpty();
 
                 if (!activating) {
-                    // Deactivating
+                    // Deactivating by pressing AutoRun key
                     toggled.clear();
+                    restoreAutoJump(client);
                 } else {
                     // Activating
                     Set<MovementDirection> pressedDirections = Arrays.stream(MovementDirection.values())
@@ -63,6 +67,7 @@ public class AutoRun implements ClientModInitializer {
                     }
 
                     timeActivated = client.world.getTime();
+                    enableAutoJump(client);
                 }
             }
 
@@ -72,14 +77,28 @@ public class AutoRun implements ClientModInitializer {
                 for (MovementDirection dir : toggled) {
                     for (KeyBinding terminator : dir.getTerminators(client)) {
                         if (terminator.isPressed()) {
+                            // Deactivating by pressing movement key
                             toggled.clear();
                             timeActivated = -1;
+                            restoreAutoJump(client);
                             break x;
                         }
                     }
                 }
             }
         });
+    }
+
+    public static void enableAutoJump(MinecraftClient client) {
+        originalAutoJumpSetting = client.options.autoJump;
+
+        client.options.autoJump = true;
+        client.options.sendClientSettings();
+    }
+
+    public static void restoreAutoJump(MinecraftClient client) {
+        client.options.autoJump = originalAutoJumpSetting;
+        client.options.sendClientSettings();
     }
 
     public static void loadConfig(File file) {
