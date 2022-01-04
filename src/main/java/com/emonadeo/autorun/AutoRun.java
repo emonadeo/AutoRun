@@ -30,12 +30,14 @@ public class AutoRun implements ClientModInitializer {
     private static int delayBuffer;
 
     private static boolean originalAutoJumpSetting;
+    private static boolean toggleAutoJump;
 
     @Override
     public void onInitializeClient() {
         AutoRun.toggled = new HashSet<>();
         AutoRun.timeActivated = -1;
         AutoRun.delayBuffer = 20;
+        AutoRun.toggleAutoJump = true;
         AutoRun.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
@@ -90,6 +92,9 @@ public class AutoRun implements ClientModInitializer {
     }
 
     public static void enableAutoJump(MinecraftClient client) {
+        if (!toggleAutoJump)
+            return;
+
         originalAutoJumpSetting = client.options.autoJump;
 
         client.options.autoJump = true;
@@ -97,6 +102,9 @@ public class AutoRun implements ClientModInitializer {
     }
 
     public static void restoreAutoJump(MinecraftClient client) {
+        if (!toggleAutoJump)
+            return;
+
         client.options.autoJump = originalAutoJumpSetting;
         client.options.sendClientSettings();
     }
@@ -108,17 +116,21 @@ public class AutoRun implements ClientModInitializer {
                 saveConfig(file);
             }
             cfg.load(new FileInputStream(file));
-            delayBuffer = Integer.parseInt(cfg.getProperty("delayBuffer"));
+            delayBuffer = Integer.parseInt(cfg.getProperty("delayBuffer", "20"));
+            toggleAutoJump = Boolean.parseBoolean(cfg.getProperty("toggleAutoJump", "true"));
+
+            // Re-save so that new properties will appear in old config files
+            saveConfig(file);
         } catch (IOException e) {
             e.printStackTrace();
-            delayBuffer = 20;
         }
     }
 
     public static void saveConfig(File file) {
         try {
             FileOutputStream fos = new FileOutputStream(file, false);
-            fos.write(("delayBuffer=" + delayBuffer).getBytes());
+            fos.write(("delayBuffer=" + delayBuffer + "\n").getBytes());
+            fos.write(("toggleAutoJump=" + toggleAutoJump + "\n").getBytes());
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
