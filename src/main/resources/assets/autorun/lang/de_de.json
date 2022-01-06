@@ -1,0 +1,10 @@
+{
+  "key.autorun.toggle": "Automatisch laufen",
+  "title.autorun.config": "AutoRun",
+  "config.autorun.general": "Allgemein",
+  "config.autorun.delayBuffer": "Aktivierungspuffer",
+  "config.autorun.delayBuffer.description": "Ticks nach Aktivierung, bevor automatisches Laufen wieder deaktiviert werden kann",
+  "config.autorun.toggleAutoJump": "Automatisch springen",
+  "config.autorun.toggleAutoJump.description": "Aktiviere automatisches Springen beim automatischen Laufen"
+}
+
