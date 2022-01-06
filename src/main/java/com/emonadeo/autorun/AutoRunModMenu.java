@@ -22,11 +22,20 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory<Screen> {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("config." + AutoRun.MODID + ".general"));
+
+        // Toogle Auto-Jump
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config." + AutoRun.MODID + ".toggleAutoJump"), AutoRun.isToggleAutoJump())
+                .setDefaultValue(true)
+                .setTooltip(new TranslatableText("config." + AutoRun.MODID + ".toggleAutoJump.description"))
+                .setSaveConsumer(AutoRun::setToggleAutoJump)
+                .build());
+
+        // Delay Buffer
         general.addEntry(entryBuilder.startIntField(new TranslatableText("config." + AutoRun.MODID + ".delayBuffer"), AutoRun.getDelayBuffer())
-            .setDefaultValue(20)
-            .setTooltip(new TranslatableText("config." + AutoRun.MODID + ".delayBuffer.description"))
-            .setSaveConsumer(AutoRun::setDelayBuffer)
-            .build());
+                .setDefaultValue(20)
+                .setTooltip(new TranslatableText("config." + AutoRun.MODID + ".delayBuffer.description"))
+                .setSaveConsumer(AutoRun::setDelayBuffer)
+                .build());
 
         return builder.setSavingRunnable(() -> {
             AutoRun.saveConfig(AutoRun.CFG_FILE);

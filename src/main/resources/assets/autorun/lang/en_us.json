@@ -3,6 +3,8 @@
   "title.autorun.config": "AutoRun",
   "config.autorun.general": "General",
   "config.autorun.delayBuffer": "Delay Buffer",
-  "config.autorun.delayBuffer.description": "Activation buffer before the keybind can be deactivated again"
+  "config.autorun.delayBuffer.description": "Activation buffer before the keybind can be deactivated again",
+  "config.autorun.toggleAutoJump": "Toggle Auto-Jump",
+  "config.autorun.toggleAutoJump.description": "Enable Auto-Jump while AutoRun is active"
 }
 

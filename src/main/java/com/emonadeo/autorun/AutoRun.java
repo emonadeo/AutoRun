@@ -157,4 +157,12 @@ public class AutoRun implements ClientModInitializer {
     public static void setDelayBuffer(int delayBuffer) {
         AutoRun.delayBuffer = delayBuffer;
     }
+
+    public static boolean isToggleAutoJump() {
+        return toggleAutoJump;
+    }
+
+    public static void setToggleAutoJump(boolean toggleAutoJump) {
+        AutoRun.toggleAutoJump = toggleAutoJump;
+    }
 }
