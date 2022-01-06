@@ -1,0 +1,9 @@
+{
+  "key.autorun.toggle": "Automatisch lopen",
+  "title.autorun.config": "AutoRun",
+  "config.autorun.general": "Algemeen",
+  "config.autorun.delayBuffer": "Vertragingsbuffer",
+  "config.autorun.delayBuffer.description": "Het aantal ticks voordat handmatige bewegingen automatisch lopen kan uitschakelen.",
+  "config.autorun.toggleAutoJump": "Automatisch springen",
+  "config.autorun.toggleAutoJump.description": "Activeer automatisch springen terwijl automatisch lopen actief is."
+}
