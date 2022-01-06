@@ -1,9 +1,12 @@
 package com.emonadeo.autorun;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -28,11 +31,15 @@ public class AutoRun implements ClientModInitializer {
     private static long timeActivated;
     private static int delayBuffer;
 
+    private static boolean originalAutoJumpSetting;
+    private static boolean toggleAutoJump;
+
     @Override
     public void onInitializeClient() {
         AutoRun.toggled = new HashSet<>();
         AutoRun.timeActivated = -1;
         AutoRun.delayBuffer = 20;
+        AutoRun.toggleAutoJump = true;
         AutoRun.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
@@ -47,8 +54,9 @@ public class AutoRun implements ClientModInitializer {
                 boolean activating = toggled.isEmpty();
 
                 if (!activating) {
-                    // Deactivating
+                    // Deactivating by pressing AutoRun key
                     toggled.clear();
+                    restoreAutoJump(client);
                 } else {
                     // Activating
                     Set<MovementDirection> pressedDirections = Arrays.stream(MovementDirection.values())
@@ -63,6 +71,7 @@ public class AutoRun implements ClientModInitializer {
                     }
 
                     timeActivated = client.world.getTime();
+                    enableAutoJump(client);
                 }
             }
 
@@ -72,14 +81,41 @@ public class AutoRun implements ClientModInitializer {
                 for (MovementDirection dir : toggled) {
                     for (KeyBinding terminator : dir.getTerminators(client)) {
                         if (terminator.isPressed()) {
+                            // Deactivating by pressing movement key
                             toggled.clear();
                             timeActivated = -1;
+                            restoreAutoJump(client);
                             break x;
                         }
                     }
                 }
             }
         });
+
+        ClientEntityEvents.ENTITY_UNLOAD.register((entity, clientWorld) -> {
+            if (entity instanceof ClientPlayerEntity) {
+                restoreAutoJump(MinecraftClient.getInstance());
+                toggled.clear();
+            }
+        });
+    }
+
+    public static void enableAutoJump(MinecraftClient client) {
+        if (!toggleAutoJump)
+            return;
+
+        originalAutoJumpSetting = client.options.autoJump;
+
+        client.options.autoJump = true;
+        client.options.sendClientSettings();
+    }
+
+    public static void restoreAutoJump(MinecraftClient client) {
+        if (!toggleAutoJump)
+            return;
+
+        client.options.autoJump = originalAutoJumpSetting;
+        client.options.sendClientSettings();
     }
 
     public static void loadConfig(File file) {
@@ -89,17 +125,21 @@ public class AutoRun implements ClientModInitializer {
                 saveConfig(file);
             }
             cfg.load(new FileInputStream(file));
-            delayBuffer = Integer.parseInt(cfg.getProperty("delayBuffer"));
+            delayBuffer = Integer.parseInt(cfg.getProperty("delayBuffer", "20"));
+            toggleAutoJump = Boolean.parseBoolean(cfg.getProperty("toggleAutoJump", "true"));
+
+            // Re-save so that new properties will appear in old config files
+            saveConfig(file);
         } catch (IOException e) {
             e.printStackTrace();
-            delayBuffer = 20;
         }
     }
 
     public static void saveConfig(File file) {
         try {
             FileOutputStream fos = new FileOutputStream(file, false);
-            fos.write(("delayBuffer=" + delayBuffer).getBytes());
+            fos.write(("delayBuffer=" + delayBuffer + "\n").getBytes());
+            fos.write(("toggleAutoJump=" + toggleAutoJump + "\n").getBytes());
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
