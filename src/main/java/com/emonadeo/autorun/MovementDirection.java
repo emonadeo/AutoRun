@@ -16,13 +16,13 @@ public enum MovementDirection {
     public KeyBinding getKeyBinding(MinecraftClient client) {
         switch (this) {
             default:
-                return client.options.keyForward;
+                return client.options.forwardKey;
             case BACK:
-                return client.options.keyBack;
+                return client.options.backKey;
             case LEFT:
-                return client.options.keyLeft;
+                return client.options.leftKey;
             case RIGHT:
-                return client.options.keyRight;
+                return client.options.rightKey;
         }
     }
 
@@ -30,14 +30,14 @@ public enum MovementDirection {
         switch (this) {
             default:
                 return Stream.of(
-                        client.options.keyForward,
-                        client.options.keyBack)
+                        client.options.forwardKey,
+                        client.options.backKey)
                         .collect(Collectors.toSet());
             case LEFT:
             case RIGHT:
                 return Stream.of(
-                        client.options.keyLeft,
-                        client.options.keyRight)
+                        client.options.leftKey,
+                        client.options.rightKey)
                         .collect(Collectors.toSet());
         }
     }

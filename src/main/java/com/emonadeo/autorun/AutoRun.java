@@ -104,9 +104,9 @@ public class AutoRun implements ClientModInitializer {
         if (!toggleAutoJump)
             return;
 
-        originalAutoJumpSetting = client.options.autoJump;
+        originalAutoJumpSetting = client.options.getAutoJump().getValue();
 
-        client.options.autoJump = true;
+        client.options.getAutoJump().setValue(true);
         client.options.sendClientSettings();
     }
 
@@ -114,7 +114,7 @@ public class AutoRun implements ClientModInitializer {
         if (!toggleAutoJump)
             return;
 
-        client.options.autoJump = originalAutoJumpSetting;
+        client.options.getAutoJump().setValue(originalAutoJumpSetting);
         client.options.sendClientSettings();
     }
 

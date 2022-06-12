@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "0.10-SNAPSHOT"
+    id "fabric-loom" version "0.12-SNAPSHOT"
     id "maven-publish"
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id "com.modrinth.minotaur" version "1.2.1"
@@ -93,7 +93,7 @@ curseforge {
             changelogType = "text"
             changelog = file("changelog.txt")
 
-            addGameVersion "1.18"
+            addGameVersion "1.19"
             addGameVersion "Java 17"
             addGameVersion "Fabric"
 
@@ -117,9 +117,9 @@ import com.modrinth.minotaur.TaskModrinthUpload
 task publishModrinth (type: TaskModrinthUpload) {
     token = project.hasProperty("modrinthApiKey") ? project.property("modrinthApiKey") : System.getenv("modrinthApiKey")
     projectId = "2i7tg1Wv"
-    versionName = "v${project.mod_version} (Minecraft 1.18)"
+    versionName = "v${project.mod_version} (Minecraft 1.19)"
     versionNumber = version
     uploadFile = remapJar
-    addGameVersion "1.18"
+    addGameVersion "1.19"
     addLoader "fabric"
 }
