@@ -1,6 +1,1 @@
-* Added config option to toggle Auto-Jump automatically when Auto-Run is active
-* Added german localization
-* Changed localization from AutoRun to Auto-Run in parity with Auto-Jump
-  Name of the mod is still: AutoRun
-  Name of the action: Auto-Run
-  Confusing, I know
+* Ported to 1.19
