@@ -1,33 +1,33 @@
 {
-  "schemaVersion": 1,
-  "id": "autorun",
-  "version": "${mod_version}",
-
-  "name": "AutoRun",
-  "description": "Hands-free walking and sprinting",
-  "authors": [
-    "Emonadeo"
-  ],
-  "contact": {
-    "homepage": "https://github.com/Emonadeo",
-    "sources": "https://github.com/Emonadeo/AutoRun"
-  },
-
-  "license": "CC0-1.0",
-  "icon": "assets/autorun/icon.png",
-
-  "environment": "client",
-  "entrypoints": {
-    "client": [ "com.emonadeo.autorun.AutoRun" ],
-    "modmenu": [ "com.emonadeo.autorun.AutoRunModMenu" ]
-  },
-  "mixins": [
-    "autorun.mixins.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.14.7",
-    "fabric": "*",
-    "minecraft": "1.19.x"
-  }
+	"schemaVersion": 1,
+	"id": "autorun",
+	"version": "${mod_version}",
+	"name": "AutoRun",
+	"description": "Hands-free walking and sprinting",
+	"authors": [
+		"Emonadeo"
+	],
+	"contact": {
+		"homepage": "https://github.com/Emonadeo",
+		"sources": "https://github.com/Emonadeo/AutoRun"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/autorun/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [ "com.emonadeo.autorun.AutoRunMod" ],
+		"modmenu": [ "com.emonadeo.autorun.AutoRunModMenu" ]
+	},
+	"mixins": [
+		{
+			"config": "autorun.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
 }

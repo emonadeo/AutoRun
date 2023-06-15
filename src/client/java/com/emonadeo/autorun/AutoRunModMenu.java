@@ -18,28 +18,28 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory<Screen> {
     public Screen create(Screen screen) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(screen)
-                .setTitle(Text.translatable("title." + AutoRun.MODID + ".config"));
+                .setTitle(Text.translatable("title." + AutoRunMod.MODID + ".config"));
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-        ConfigCategory general = builder.getOrCreateCategory(Text.translatable("config." + AutoRun.MODID + ".general"));
+        ConfigCategory general = builder.getOrCreateCategory(Text.translatable("config." + AutoRunMod.MODID + ".general"));
 
         // Toogle Auto-Jump
-        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config." + AutoRun.MODID + ".toggleAutoJump"), AutoRun.isToggleAutoJump())
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config." + AutoRunMod.MODID + ".toggleAutoJump"), AutoRunMod.isToggleAutoJump())
                 .setDefaultValue(true)
-                .setTooltip(Text.translatable("config." + AutoRun.MODID + ".toggleAutoJump.description"))
-                .setSaveConsumer(AutoRun::setToggleAutoJump)
+                .setTooltip(Text.translatable("config." + AutoRunMod.MODID + ".toggleAutoJump.description"))
+                .setSaveConsumer(AutoRunMod::setToggleAutoJump)
                 .build());
 
         // Delay Buffer
-        general.addEntry(entryBuilder.startIntField(Text.translatable("config." + AutoRun.MODID + ".delayBuffer"), AutoRun.getDelayBuffer())
+        general.addEntry(entryBuilder.startIntField(Text.translatable("config." + AutoRunMod.MODID + ".delayBuffer"), AutoRunMod.getDelayBuffer())
                 .setDefaultValue(20)
-                .setTooltip(Text.translatable("config." + AutoRun.MODID + ".delayBuffer.description"))
-                .setSaveConsumer(AutoRun::setDelayBuffer)
+                .setTooltip(Text.translatable("config." + AutoRunMod.MODID + ".delayBuffer.description"))
+                .setSaveConsumer(AutoRunMod::setDelayBuffer)
                 .build());
 
         return builder.setSavingRunnable(() -> {
-            AutoRun.saveConfig(AutoRun.CFG_FILE);
-            AutoRun.loadConfig(AutoRun.CFG_FILE);
+            AutoRunMod.saveConfig(AutoRunMod.CFG_FILE);
+            AutoRunMod.loadConfig(AutoRunMod.CFG_FILE);
         }).build();
     }
 }

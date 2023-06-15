@@ -21,7 +21,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class AutoRun implements ClientModInitializer {
+public class AutoRunMod implements ClientModInitializer {
 
     public static final String MODID = "autorun";
     public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "autorun.properties");
@@ -36,11 +36,11 @@ public class AutoRun implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        AutoRun.toggled = new HashSet<>();
-        AutoRun.timeActivated = -1;
-        AutoRun.delayBuffer = 20;
-        AutoRun.toggleAutoJump = true;
-        AutoRun.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        AutoRunMod.toggled = new HashSet<>();
+        AutoRunMod.timeActivated = -1;
+        AutoRunMod.delayBuffer = 20;
+        AutoRunMod.toggleAutoJump = true;
+        AutoRunMod.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_O, // Default to 'o'
@@ -155,7 +155,7 @@ public class AutoRun implements ClientModInitializer {
     }
 
     public static void setDelayBuffer(int delayBuffer) {
-        AutoRun.delayBuffer = delayBuffer;
+        AutoRunMod.delayBuffer = delayBuffer;
     }
 
     public static boolean isToggleAutoJump() {
@@ -163,6 +163,6 @@ public class AutoRun implements ClientModInitializer {
     }
 
     public static void setToggleAutoJump(boolean toggleAutoJump) {
-        AutoRun.toggleAutoJump = toggleAutoJump;
+        AutoRunMod.toggleAutoJump = toggleAutoJump;
     }
 }

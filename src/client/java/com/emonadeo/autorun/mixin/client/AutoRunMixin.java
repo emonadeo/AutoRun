@@ -1,6 +1,6 @@
-package com.emonadeo.autorun.mixin;
+package com.emonadeo.autorun.mixin.client;
 
-import com.emonadeo.autorun.AutoRun;
+import com.emonadeo.autorun.AutoRunMod;
 import com.emonadeo.autorun.MovementDirection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,7 +20,7 @@ public class AutoRunMixin {
             opcode = Opcodes.GETFIELD,
             ordinal = 0))
     private boolean onPressingForward(KeyboardInput input) {
-        input.pressingForward = input.pressingForward || AutoRun.getToggled().contains(MovementDirection.FORWARD);
+        input.pressingForward = input.pressingForward || AutoRunMod.getToggled().contains(MovementDirection.FORWARD);
         return input.pressingForward;
     }
 
@@ -30,7 +30,7 @@ public class AutoRunMixin {
             opcode = Opcodes.GETFIELD,
             ordinal = 0))
     private boolean onPressingBack(KeyboardInput input) {
-        input.pressingBack = input.pressingBack || AutoRun.getToggled().contains(MovementDirection.BACK);
+        input.pressingBack = input.pressingBack || AutoRunMod.getToggled().contains(MovementDirection.BACK);
         return input.pressingBack;
     }
 
@@ -40,7 +40,7 @@ public class AutoRunMixin {
             opcode = Opcodes.GETFIELD,
             ordinal = 0))
     private boolean onPressingLeft(KeyboardInput input) {
-        input.pressingLeft = input.pressingLeft || AutoRun.getToggled().contains(MovementDirection.LEFT);
+        input.pressingLeft = input.pressingLeft || AutoRunMod.getToggled().contains(MovementDirection.LEFT);
         return input.pressingLeft;
     }
 
@@ -50,7 +50,7 @@ public class AutoRunMixin {
             opcode = Opcodes.GETFIELD,
             ordinal = 0))
     private boolean onPressingRight(KeyboardInput input) {
-        input.pressingRight = input.pressingRight || AutoRun.getToggled().contains(MovementDirection.RIGHT);
+        input.pressingRight = input.pressingRight || AutoRunMod.getToggled().contains(MovementDirection.RIGHT);
         return input.pressingRight;
     }
 }
