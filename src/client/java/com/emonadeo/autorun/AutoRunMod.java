@@ -33,7 +33,7 @@ public class AutoRunMod implements ClientModInitializer {
 
     private static boolean originalAutoJumpSetting;
     private static boolean toggleAutoJump;
-    private static boolean toggleRunOnStart;
+    private static boolean togglePersistAutoRun;
 
     @Override
     public void onInitializeClient() {
@@ -41,7 +41,7 @@ public class AutoRunMod implements ClientModInitializer {
         AutoRunMod.timeActivated = -1;
         AutoRunMod.delayBuffer = 20;
         AutoRunMod.toggleAutoJump = true;
-        AutoRunMod.toggleRunOnStart = false;
+        AutoRunMod.togglePersistAutoRun = false;
         AutoRunMod.keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.autorun.toggle",
                 InputUtil.Type.KEYSYM,
@@ -97,7 +97,7 @@ public class AutoRunMod implements ClientModInitializer {
         ClientEntityEvents.ENTITY_UNLOAD.register((entity, clientWorld) -> {
             if (entity instanceof ClientPlayerEntity) {
                 restoreAutoJump(MinecraftClient.getInstance());
-                if (!toggleRunOnStart){
+                if (!togglePersistAutoRun){
                     toggled.clear();
                 }
             };
@@ -132,7 +132,7 @@ public class AutoRunMod implements ClientModInitializer {
             cfg.load(new FileInputStream(file));
             delayBuffer = Integer.parseInt(cfg.getProperty("delayBuffer", "20"));
             toggleAutoJump = Boolean.parseBoolean(cfg.getProperty("toggleAutoJump", "true"));
-            toggleRunOnStart = Boolean.parseBoolean(cfg.getProperty("runOnStart", "false"));
+            togglePersistAutoRun = Boolean.parseBoolean(cfg.getProperty("togglePersistAutoRun", "false"));
 
             // Re-save so that new properties will appear in old config files
             saveConfig(file);
@@ -146,7 +146,7 @@ public class AutoRunMod implements ClientModInitializer {
             FileOutputStream fos = new FileOutputStream(file, false);
             fos.write(("delayBuffer=" + delayBuffer + "\n").getBytes());
             fos.write(("toggleAutoJump=" + toggleAutoJump + "\n").getBytes());
-            fos.write(("runOnStart=" + toggleRunOnStart + "\n").getBytes());
+            fos.write(("togglePersistAutoRun=" + togglePersistAutoRun + "\n").getBytes());
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -173,12 +173,12 @@ public class AutoRunMod implements ClientModInitializer {
         AutoRunMod.toggleAutoJump = toggleAutoJump;
     }
     
-    public static boolean isRunOnStart() {
-        return toggleRunOnStart;
+    public static boolean isPersistAutoRun() {
+        return togglePersistAutoRun;
     }
 
-    public static void setToggleRunOnStart(boolean toggleRunOnStart) {
-        AutoRunMod.toggleRunOnStart = toggleRunOnStart;
+    public static void setPersistAutoRun(boolean togglePersistAutoRun) {
+        AutoRunMod.togglePersistAutoRun = togglePersistAutoRun;
     }
 
 }

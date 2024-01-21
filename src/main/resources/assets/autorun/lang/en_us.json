@@ -1,7 +1,7 @@
 {
   "key.autorun.toggle": "Toggle Auto-Run",
-  "config.autorun.toggleRunOnStart": "Toggle Run On Start",
-  "config.autorun.toggleRunOnStart.description": "Should the game start with last key presed?",
+  "config.autorun.togglePersistAutoRun": "Persist Auto-Run",
+  "config.autorun.togglePersistAutoRun.description": "Keep Auto-Run toggled between leaving and joining worlds or servers",
   "title.autorun.config": "AutoRun",
   "config.autorun.general": "General",
   "config.autorun.delayBuffer": "Delay Buffer",

@@ -31,10 +31,10 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory<Screen> {
                 .build());
 
         // Toogle run on start
-        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config." + AutoRunMod.MODID + ".toggleRunOnStart"), AutoRunMod.isRunOnStart())
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config." + AutoRunMod.MODID + ".togglePersistAutoRun"), AutoRunMod.isPersistAutoRun())
                 .setDefaultValue(false)
-                .setTooltip(Text.translatable("config." + AutoRunMod.MODID + ".toggleRunOnStart.description"))
-                .setSaveConsumer(AutoRunMod::setToggleRunOnStart)
+                .setTooltip(Text.translatable("config." + AutoRunMod.MODID + ".togglePersistAutoRun.description"))
+                .setSaveConsumer(AutoRunMod::setPersistAutoRun)
                 .build());
 
 
