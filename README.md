@@ -6,13 +6,11 @@
 
 Download the JAR and place it into your .minecraft/mods folder. If it doesn't exist create it.
 
-If you are using multiple Fabric mods I recommend also getting [Mod Menu](https://modrinth.com/mod/modmenu) to keep an overview over all installed mods.
-
-> **Note:** This mod is client-side only, meaning it does not have to be installed on the server.
+> **Note:** This mod is client-side only, meaning it should only be installed on the client and not on servers.
 
 ## Usage
 
-Press 'P' to toggle automatic walking. You can also hit the sprint key to sprint while auto-walking.
+Press 'O' to toggle automatic walking. You can also hit the sprint key to sprint while auto-walking.
 
 This keybind can be customized in the controls options.
 
