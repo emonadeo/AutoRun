@@ -2,11 +2,13 @@
 
 ## Installation
 
-> **Important:** This mod requires [Fabric API](https://modrinth.com/mod/fabric-api) like most other Fabric mods.
-
 Download the JAR and place it into your .minecraft/mods folder. If it doesn't exist create it.
 
-> **Note:** This mod is client-side only, meaning it should only be installed on the client and not on servers.
+> [!IMPORTANT]
+> This mod requires [Fabric API](https://modrinth.com/mod/fabric-api) like most other Fabric mods.
+
+> [!NOTE]
+> This mod is client-side only, meaning it should only be installed on the client and not on servers.
 
 ## Usage
 
