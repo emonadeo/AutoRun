@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 public class AutoRunMod implements ClientModInitializer {
 
     public static final String MODID = "autorun";
-    public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "autorun.properties");
+    public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(),
+            "autorun.properties");
 
     private static KeyBinding keyBinding;
     private static Set<MovementDirection> toggled;
@@ -79,8 +80,7 @@ public class AutoRunMod implements ClientModInitializer {
 
             if (timeActivated != -1 && client.world != null
                     && client.world.getTime() - timeActivated >= delayBuffer) {
-                x:
-                for (MovementDirection dir : toggled) {
+                x: for (MovementDirection dir : toggled) {
                     for (KeyBinding terminator : dir.getTerminators(client)) {
                         if (terminator.isPressed()) {
                             // Deactivating by pressing movement key
@@ -96,12 +96,11 @@ public class AutoRunMod implements ClientModInitializer {
 
         ClientEntityEvents.ENTITY_UNLOAD.register((entity, clientWorld) -> {
             if (entity instanceof ClientPlayerEntity) {
-                restoreAutoJump(MinecraftClient.getInstance());
-                if (!togglePersistAutoRun){
+                if (!togglePersistAutoRun) {
                     toggled.clear();
+                    restoreAutoJump(MinecraftClient.getInstance());
                 }
-            };
-          
+            }
         });
     }
 
@@ -172,7 +171,7 @@ public class AutoRunMod implements ClientModInitializer {
     public static void setToggleAutoJump(boolean toggleAutoJump) {
         AutoRunMod.toggleAutoJump = toggleAutoJump;
     }
-    
+
     public static boolean isPersistAutoRun() {
         return togglePersistAutoRun;
     }
