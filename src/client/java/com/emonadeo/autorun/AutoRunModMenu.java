@@ -30,6 +30,14 @@ public class AutoRunModMenu implements ModMenuApi, ConfigScreenFactory<Screen> {
                 .setSaveConsumer(AutoRunMod::setToggleAutoJump)
                 .build());
 
+        // Toogle run on start
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config." + AutoRunMod.MODID + ".togglePersistAutoRun"), AutoRunMod.isPersistAutoRun())
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("config." + AutoRunMod.MODID + ".togglePersistAutoRun.description"))
+                .setSaveConsumer(AutoRunMod::setPersistAutoRun)
+                .build());
+
+
         // Delay Buffer
         general.addEntry(entryBuilder.startIntField(Text.translatable("config." + AutoRunMod.MODID + ".delayBuffer"), AutoRunMod.getDelayBuffer())
                 .setDefaultValue(20)
